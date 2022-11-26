@@ -4,6 +4,7 @@
         "dev": "vite",
         "build": "vite build",
         "watch": "webpack --watch --progress"
+        
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.11.0",
