@@ -16,8 +16,11 @@ class ProfileFactory extends Factory
      */
     public function definition()
     {
+        $gender = ['Male', 'Female'];
+        $slug = $this->faker->name;
         return [
-            //
+            'slug' => Str::of($slug)->slug('-'),
+            'gender' => Arr::random($gender),
         ];
     }
 }

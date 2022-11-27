@@ -18,6 +18,7 @@ const form = useForm({
     _method: 'PUT',
     name: props.user.name,
     email: props.user.email,
+    gender: props.gender,
     photo: null,
 });
 
@@ -171,6 +172,17 @@ const clearPhotoFileInput = () => {
                         A new verification link has been sent to your email address.
                     </div>
                 </div>
+            </div>
+            <!-- Gender -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="gender" value="Giới tính" />
+                <select name="gender" id="gender" class="block focus:border-gray-500 mt-1 w-full" v-model="form.gender">
+                    <option disabled :value="form.gender">{{ form.gender }}</option>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
+                </select>
+                <jet-input-error :message="form.errors.gender" class="mt-2" />
             </div>
         </template>
 

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\User;
 use App\Models\User;
-use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class ProfileController extends Controller
+class MemberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('User/Members/Index', [
+            'members' => User::all()
+        ]);
     }
 
     /**
@@ -42,17 +44,12 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return Inertia::render('User/Profile/Show', [
-            'profile' => $user,
-            'isFriendsWith' => auth()->user()->is_friends_with($user->id),
-            'friendRequestSentTo' => auth()->user()->has_pending_friend_request_sent_to($user->id),
-            'friendRequestRecievedFrom' => auth()->user()->has_pending_friend_request_from($user->id),
-        ]);
+        //
     }
 
     /**

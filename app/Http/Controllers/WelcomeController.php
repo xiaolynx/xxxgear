@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers;
+
 use App\Models\User;
 use Inertia\Inertia;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-class ProfileController extends Controller
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
+class WelcomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,17 +43,17 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show()
     {
-        return Inertia::render('User/Profile/Show', [
-            'profile' => $user,
-            'isFriendsWith' => auth()->user()->is_friends_with($user->id),
-            'friendRequestSentTo' => auth()->user()->has_pending_friend_request_sent_to($user->id),
-            'friendRequestRecievedFrom' => auth()->user()->has_pending_friend_request_from($user->id),
-        ]);
+        return Inertia::render('Welcome', [
+        'users' => User::count(),
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
     }
 
     /**
