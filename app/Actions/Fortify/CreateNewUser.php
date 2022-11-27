@@ -32,5 +32,11 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        return Profile::create([
+            'user_id'=>$user->id,
+            'slug'=>Str::of($user->name)->slug('-'),
+            'gender'=>$input['gender'],
+        ]);
     }
 }
