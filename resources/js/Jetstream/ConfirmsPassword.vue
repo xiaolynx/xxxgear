@@ -13,7 +13,7 @@
                 {{ content }}
 
                 <div class="mt-4">
-                    <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                    <jet-input type="password" class="mt-1 block w-3/4" placeholder="Mật khẩu"
                                 ref="password"
                                 v-model="form.password"
                                 @keyup.enter.native="confirmPassword" />
@@ -45,13 +45,13 @@
     export default {
         props: {
             title: {
-                default: 'Confirm Password',
+                default: 'Xác nhận mật khẩu',
             },
             content: {
-                default: 'For your security, please confirm your password to continue.',
+                default: 'Để bảo mật cho bạn, vui lòng xác nhận mật khẩu của bạn để tiếp tục.',
             },
             button: {
-                default: 'Confirm',
+                default: 'Xác nhận',
             }
         },
 

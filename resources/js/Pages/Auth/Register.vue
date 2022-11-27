@@ -2,7 +2,7 @@
     <jet-authentication-card>
         <template #logo>
             <Link :href="route('welcome')">
-                <img src="../images/logo2.png" alt="Logo" class="w-48">
+                <img src="../images/logo1.png" alt="Logo" class="w-48">
             </Link>
         </template>
 
@@ -59,12 +59,12 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                <Link :href="route('login')" class=" text-sm text-gray-600 hover:text-gray-900">
                     Đã có tài khoản?
                 </Link>
 
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Đăng ký
+                <jet-button class="ml-4 " :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    ĐĂNG KÝ
                 </jet-button>
             </div>
         </form>

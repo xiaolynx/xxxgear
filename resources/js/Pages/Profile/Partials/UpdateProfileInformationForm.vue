@@ -80,11 +80,11 @@ const clearPhotoFileInput = () => {
 <template>
     <FormSection @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Thông tin cá nhân
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Cập nhật thông tin hồ sơ và địa chỉ email của bạn.
         </template>
 
         <template #form>
@@ -98,7 +98,7 @@ const clearPhotoFileInput = () => {
                     @change="updatePhotoPreview"
                 >
 
-                <InputLabel for="photo" value="Photo" />
+                <InputLabel for="photo" value="Ảnh đại diện" />
 
                 <!-- Current Profile Photo -->
                 <div v-show="! photoPreview" class="mt-2">
@@ -114,7 +114,7 @@ const clearPhotoFileInput = () => {
                 </div>
 
                 <SecondaryButton class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
-                    Select A New Photo
+                    Chọn ảnh
                 </SecondaryButton>
 
                 <SecondaryButton
@@ -123,7 +123,7 @@ const clearPhotoFileInput = () => {
                     class="mt-2"
                     @click.prevent="deletePhoto"
                 >
-                    Remove Photo
+                    Xóa ảnh
                 </SecondaryButton>
 
                 <InputError :message="form.errors.photo" class="mt-2" />
@@ -131,7 +131,7 @@ const clearPhotoFileInput = () => {
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Tên" />
                 <TextInput
                     id="name"
                     v-model="form.name"
@@ -175,7 +175,7 @@ const clearPhotoFileInput = () => {
             </div>
             <!-- Gender -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="gender" value="Giới tính" />
+                <InputLabel for="gender" value="Giới tính" />
                 <select name="gender" id="gender" class="block focus:border-gray-500 mt-1 w-full" v-model="form.gender">
                     <option disabled :value="form.gender">{{ form.gender }}</option>
                     <option value="Nam">Nam</option>
@@ -184,15 +184,36 @@ const clearPhotoFileInput = () => {
                 </select>
                 <jet-input-error :message="form.errors.gender" class="mt-2" />
             </div>
+
+            <!-- Ngày sinh -->
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="date" value="Ngày sinh" />
+                <select name="date" id="date" class="block focus:border-gray-500 mt-1 w-full" v-model="form.gender">
+                    <option disabled :value="form.date">{{ form.date }}</option>
+                    <option value="day">---</option>
+                    
+                </select>
+                <jet-input-error :message="form.errors.date" class="mt-2" />
+            </div>
+            <!-- Nơi ở -->
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="location" value="Địa chỉ" />
+                <select name="location" id="location" class="block focus:border-gray-500 mt-1 w-full" v-model="form.gender">
+                    <option disabled :value="form.location">{{ form.location }}</option>
+                    <option value="location">---</option>
+                    
+                </select>
+                <jet-input-error :message="form.errors.location" class="mt-2" />
+            </div>
         </template>
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Đã lưu.
             </ActionMessage>
 
             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Lưu
             </PrimaryButton>
         </template>
     </FormSection>

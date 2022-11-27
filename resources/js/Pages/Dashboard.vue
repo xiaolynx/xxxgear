@@ -40,7 +40,7 @@
             <div class="flex justify-between items-center w-full">
                 <h2 class="flex items-end font-semibold text-xl text-gray-800 leading-tight">
                     <img src="../Pages/images/logo1.png" :alt="logo-gear" class="h-8 w-8 rounded-full object-cover">
-                    <span class="capitalize ml-3 h-7 w-8" >Home</span>
+                    <span class="capitalize ml-3 h-7 w-24" >Trang chủ</span>
                 </h2>
             </div>
         </template>

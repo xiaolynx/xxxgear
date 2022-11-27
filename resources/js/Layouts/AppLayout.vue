@@ -37,7 +37,7 @@ const logout = () => {
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard.index')">
-                                    <img src="../Pages/images/logo1.png" class="block h-16 w-auto" />
+                                    <img src="../Pages/images/logo2.png" class="block h-16 w-auto" />
                                 </Link>
                             </div>
                             <!-- Navigation Links -->
@@ -80,10 +80,6 @@ const logout = () => {
                                         <div class="block px-4 py-2 text-xs text-gray-400">
                                             Cài đặt
                                         </div>
-
-                                        <DropdownLink :href="route('profile.show')">
-                                            Trang cá nhân
-                                        </DropdownLink>
                                         <div class="border-t border-gray-100"></div>
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
