@@ -11,6 +11,25 @@ class Post extends Model
 
     protected $fillable=['user_id','parent_id', 'body'];
 
+    protected $appends = [
+        'liked', 'disliked'
+    ];
+
+
+    public function getLikedAttribute() {
+        return $this->likes()->where('like', 1)
+            ->where('likeable_id', $this->id)
+            ->where('likeable_type', get_class($this))
+            ->count();
+    }
+
+    public function getdislikedAttribute() {
+        return $this->likes()->where('dislike', 1)
+            ->where('likeable_id', $this->id)
+            ->where('likeable_type', get_class($this))
+            ->count();
+    }
+
     /**
      * The relationships that should always be loaded.
      *
@@ -28,6 +47,9 @@ class Post extends Model
          */
         public function user() {
             return $this->belongsTo(User::class);
+        }
+        public function likes() {
+            return $this->morphMany(Like::class, 'likeable');
         }
     }
 
