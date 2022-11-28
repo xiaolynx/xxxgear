@@ -35,7 +35,7 @@ class Post extends Model
      *
      * @var array
      */
-    protected $with = ['user'];
+    protected $with = ['user','comments'];
     public function scopeAllPosts($query){
         return $query->where('user_id', auth()->id())
         ->orWhereIn('user_id', auth()->user()->friends_ids());
@@ -50,6 +50,9 @@ class Post extends Model
         }
         public function likes() {
             return $this->morphMany(Like::class, 'likeable');
+        }
+        public function comments() {
+            return $this->hasMany(Comment::class);
         }
     }
 

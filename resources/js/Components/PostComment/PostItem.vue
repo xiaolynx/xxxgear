@@ -39,7 +39,8 @@
                     <dislike :item="post" :method="submitDislike" class="ml-2">6</dislike>
                 </div>
             </div>
-            
+            <post-form :method="submit" :form="form" :text="'Comment'"></post-form>
+            <combined-comments :comments="post.comments"></combined-comments>
 
             
         </div>
@@ -48,6 +49,7 @@
 <script>
 
 import { Head, Link } from '@inertiajs/inertia-vue3'
+import CombinedComments from '@/Components/PostComment/CombinedComments.vue'
 import PostForm from '@/Components/PostComment/PostForm.vue'
 import Like from './Likes/Like.vue'
 import Dislike from './Likes/Dislike.vue'
@@ -59,6 +61,7 @@ import Dislike from './Likes/Dislike.vue'
             PostForm,
             Like,
             Dislike,
+            CombinedComments,
         },
         props :['post'],
         data() {
@@ -81,6 +84,18 @@ import Dislike from './Likes/Dislike.vue'
             }
         },
         methods: {
+            submit() {
+                this.form.post(this.route('comments.store', this.post), {
+                    preserveScroll: true,
+                    onSuccess:()=>{
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Your comment has successfully been published!'
+                        })
+                        this.form.body = null
+                    }
+                })
+            },
             deletePost() {
                 this.openMenu = false
                 this.deleteForm.delete(this.route('posts.destroy', this.post), {
