@@ -1,9 +1,10 @@
 <script >
     import PagesLayout from '@/Layouts/PagesLayout.vue';
     import CombinedPosts from '../Components/PostComment/CombinedPosts.vue';
+    import PostForm from '../Components/PostComment/PostForm.vue'
     import JetInputError from '@/Jetstream/InputError.vue'
     import BlueButton from '../Components/Buttons/BlueButton.vue'
-    import PostForm from '../Components/PostComment/PostForm.vue'
+    
     export default{
         props:['combinedPosts'],
         components:{
