@@ -8,9 +8,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import SideBar from '@/Components/SideBar.vue'
-
-;
+import SideBar from '@/Components/SideBar.vue';
 
 const showingNavigationDropdown = ref(false);
 

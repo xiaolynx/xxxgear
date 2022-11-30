@@ -25,11 +25,9 @@
         methods:{
             submit(){
                 this.form.post(this.route('posts.store'),{
-                    preserveScroll : true,
-                    onSucess:()=>{
-
-                    }
-                })
+                    
+                }),
+                this.form.body = null
             }
         }
     }

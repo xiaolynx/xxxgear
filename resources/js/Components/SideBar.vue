@@ -24,6 +24,8 @@
 
                     { name: 'Khám phá', route: route('members.index'), icon: 'users' }, 
 
+                    { name: 'Bạn bè', route: route('friends.index'), icon: 'friends' }, 
+
                     { name: 'Trang cá nhân', route: route('profile.show'), icon: 'user-edit' },
                    
                 ]

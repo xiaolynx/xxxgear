@@ -50,6 +50,12 @@ import Dislike from './Likes/Dislike.vue'
             }
         },
         methods: {
+            submit(){
+                this.form.post(this.route('posts.store'),{
+                    
+                }),
+                this.form.body = null
+            },
             submitLike() {
                 this.likeForm.post(this.route('comment-like.store', this.comment.id), {
                     preserveScroll: true,

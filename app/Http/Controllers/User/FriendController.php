@@ -16,7 +16,10 @@ class FriendController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('User/Friends/Index', [
+            'friends' => auth()->user()->friends(),
+            'requests' => auth()->user()->pending_friend_requests(),
+        ]);
     }
 
     /**
