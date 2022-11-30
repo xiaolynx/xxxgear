@@ -14,7 +14,11 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                primary:['Monterrat']
             },
+            spacing:{
+                '128':'32rem',
+            }
         },
     },
 

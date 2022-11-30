@@ -37,13 +37,14 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request, User $user) {
         $data=$request->validate([
             'body'=>'required',
         ]);
         auth()->user()->posts()->create([
             'body'=>$data['body']
         ]);
+        event(new SomeonePostedEvent($user, auth()->user()));
         return back();
           
     }

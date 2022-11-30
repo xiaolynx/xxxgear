@@ -10,14 +10,26 @@ use Illuminate\Support\Facades\Event;
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event to listener mappings for the application.
+     * The event listener mappings for the application.
      *
-     * @var array<class-string, array<int, class-string>>
+     * @var array
      */
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        \App\Events\SomeonePostedEvent::class => [
+            \App\Listeners\SomeonePostedListener::class,
+        ],
+        \App\Events\FriendRequestReceivedEvent::class => [
+            \App\Listeners\FriendRequestReceivedListener::class,
+        ],
+        \App\Events\FriendRequestAcceptedEvent::class => [
+            \App\Listeners\FriendRequestAcceptedListener::class,
+        ],
+        \App\Events\NewChatMessageEvent::class => [
+            \App\Listeners\NewChatMessageListener::class,
+        ]
     ];
 
     /**
@@ -28,15 +40,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-    }
-
-    /**
-     * Determine if events and listeners should be automatically discovered.
-     *
-     * @return bool
-     */
-    public function shouldDiscoverEvents()
-    {
-        return false;
     }
 }

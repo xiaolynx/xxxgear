@@ -10,6 +10,7 @@ use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\User\CommentLikeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\PostController;
+use App\Http\Controllers\User\RoomController;
 
 
 /*
@@ -58,6 +59,13 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('user')->group(function(
     Route::prefix('comment-like')->name('comment-like.')->group(function() {
         Route::post('/{comment}', [CommentLikeController::class, 'store'])->name('store');
         Route::delete('/{comment}', [CommentLikeController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('chat/rooms')->name('chat-rooms.')->group(function() {
+        Route::get('', [RoomController::class, 'index'])->name('index');
+        Route::get('/{room:slug}', [RoomController::class, 'show'])->name('show');
+        Route::post('/{room:slug}', [RoomController::class, 'update'])->name('update');
+        Route::post('/{room:slug}/messages', [RoomController::class, 'store'])->name('store');
     });
 
 });

@@ -4,7 +4,6 @@
         "dev": "vite",
         "build": "vite build",
         "watch": "webpack --watch --progress"
-        
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.11.0",
@@ -22,5 +21,9 @@
         "vite": "^3.0.0",
         "vue": "^3.2.31",
         "webpack-cli": "^5.0.0"
+    },
+    "dependencies": {
+        "laravel-echo": "^1.14.2",
+        "pusher-js": "^7.5.0"
     }
 }

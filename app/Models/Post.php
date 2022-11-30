@@ -12,8 +12,12 @@ class Post extends Model
     protected $fillable=['user_id','parent_id', 'body'];
 
     protected $appends = [
-        'liked', 'disliked'
+        'liked', 'disliked', 'timeAgo'
     ];
+
+    public function getTimeAgoAttribute() {
+        return $this->created_at->diffForHumans();
+    }
 
 
     public function getLikedAttribute() {

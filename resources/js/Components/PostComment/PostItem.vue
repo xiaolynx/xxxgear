@@ -31,7 +31,7 @@
 
             <div class="flex items-end my-3">
                 <div>
-                    <span class="text-sm italic">3days ago</span>
+                    <span class="text-sm italic">{{ post.timeAgo }}</span>
                 </div>
 
                 <div class="flex ml-3">
