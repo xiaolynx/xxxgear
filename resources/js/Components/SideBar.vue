@@ -26,7 +26,7 @@
 
                     { name: 'Bạn bè', route: route('friends.index'), icon: 'friends' }, 
 
-                    { name: 'Tin nhắn', route: route('friends.index'), icon: 'mess' }, 
+                    { name: 'Tin nhắn', route: route('chatify'), icon: 'mess' }, 
 
                     { name: 'Trang cá nhân', route: route('profile.show'), icon: 'user-edit' },
                    

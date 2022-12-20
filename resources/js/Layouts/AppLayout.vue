@@ -63,7 +63,7 @@ const logout = () => {
                                         class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-transparent transition duration-150 ease-in-out"
                                         v-else>
                                         <div>
-                                            {{ $page.props.user.username }}
+                                            {{ $page.props.user.name }}
                                         </div>
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"

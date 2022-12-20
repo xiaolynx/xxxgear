@@ -15,7 +15,6 @@
 
         <teamplate class="flex items-center w-full">
             <span>Tất cả</span>
-            <span class="ml-4">Bạn bè</span>
         </teamplate>
 
         <combined-posts :posts="posts.data"></combined-posts>
