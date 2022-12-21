@@ -28,6 +28,8 @@
 
                     { name: 'Tin nhắn', route: route('chatify'), icon: 'mess' }, 
 
+                    { name: 'Thông báo', route: route('notifications.index'), icon: 'bell' }, 
+
                     { name: 'Trang cá nhân', route: route('profile.show'), icon: 'user-edit' },
                    
                 ]

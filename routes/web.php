@@ -10,7 +10,8 @@ use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\User\CommentLikeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\PostController;
-use App\Http\Controllers\User\RoomController;
+use App\Http\Controllers\User\NotificationController;
+
 
 
 /*
@@ -61,6 +62,8 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('user')->group(function(
         Route::delete('/{comment}', [CommentLikeController::class, 'destroy'])->name('destroy');
     });
 
+
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
   
 
 });
