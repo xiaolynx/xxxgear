@@ -25,7 +25,7 @@
                                 <Dropdown align="right" width="96">
                                     <template #trigger>
                                     <button class="mt-1 focus:outline-none">
-                                        <div class="flex ml-2 relative">
+                                        <div class="pr-4 flex ml-2 relative">
                                             <icon name="bell" class="w-6 h-6"></icon>
                                             <template v-if="unreadNotifications.length > 0">
                                                 <span class="text-white text-xs bg-red-600 rounded-full px-2 py-1 absolute bottom-2 left-3">

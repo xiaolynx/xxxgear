@@ -32,17 +32,8 @@
                     v-model="form.password_confirmation" required autocomplete="new-password" />
             </div>
 
-            <div class="mt-4">
-                <jet-label for="gender" value="Giới tính" />
-                <select v-model="form.gender"
-                    class="block mt-1 w-full border-gray-300 focus: border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    <option disabled value="">---</option>
-                    <option v-bind:value="'Female'">Nam</option>
-                    <option v-bind:value="'Male'">Nữ</option>
-                    <option v-bind:value="'Male'">Khác</option>
-                </select>
-            </div>
-
+    
+            
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
                 <jet-label for="terms">
                     <div class="flex items-center">

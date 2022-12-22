@@ -173,38 +173,7 @@ const clearPhotoFileInput = () => {
                     </div>
                 </div>
             </div>
-            <!-- Gender -->
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="gender" value="Giới tính" />
-                <select name="gender" id="gender" class="block focus:border-gray-500 mt-1 w-full" v-model="form.gender">
-                    <option disabled :value="form.gender">{{ form.gender }}</option>
-                    <option value="Nam">Nam</option>
-                    <option value="Nữ">Nữ</option>
-                    <option value="Khác">Khác</option>
-                </select>
-                <jet-input-error :message="form.errors.gender" class="mt-2" />
-            </div>
-
-            <!-- Ngày sinh -->
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="date" value="Ngày sinh" />
-                <select name="date" id="date" class="block focus:border-gray-500 mt-1 w-full" v-model="form.gender">
-                    <option disabled :value="form.date">{{ form.date }}</option>
-                    <option value="day">---</option>
-                    
-                </select>
-                <jet-input-error :message="form.errors.date" class="mt-2" />
-            </div>
-            <!-- Nơi ở -->
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="location" value="Địa chỉ" />
-                <select name="location" id="location" class="block focus:border-gray-500 mt-1 w-full" v-model="form.gender">
-                    <option disabled :value="form.location">{{ form.location }}</option>
-                    <option value="location">---</option>
-                    
-                </select>
-                <jet-input-error :message="form.errors.location" class="mt-2" />
-            </div>
+            
         </template>
 
         <template #actions>
