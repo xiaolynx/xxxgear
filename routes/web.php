@@ -63,7 +63,11 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('user')->group(function(
     });
 
 
-    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::prefix('notifications')->name('notifications.')->group(function() {
+        Route::post('/mark-one/{id}', [NotificationController::class, 'store'])->name('store');
+        Route::get('/mark-all', [NotificationController::class, 'update'])->name('update');
+        Route::get('/mark-delete/{id}', [NotificationController::class, 'destroy'])->name('destroy');
+    });
   
 
 });

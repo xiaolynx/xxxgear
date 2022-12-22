@@ -9,6 +9,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SideBar from '@/Components/SideBar.vue';
+import Notifications from '@/Components/Notifications.vue'
 
 const showingNavigationDropdown = ref(false);
 
@@ -23,6 +24,37 @@ const switchToTeam = (team) => {
 const logout = () => {
     Inertia.post(route('logout'));
 };
+const data=()=>{
+    return {
+                showingNavigationDropdown: false,
+                unreadNotifications: this.$page.props.auth.unreadNotifications,
+                readNotifications: this.$page.props.auth.readNotifications,
+                notifications: this.$page.props.auth.notifications,
+            }
+}
+
+const mounted=()=>{
+    this.listen();
+}
+
+const listen=()=>{
+    Echo.private(`App.Models.User.${this.$page.props.user.id}`)
+                    .notification((notification) => {
+                        let newUnreadNotifications = {
+                            data: {
+                                info: {
+                                    avatar: notification.info.avatar,
+                                    message: notification.info.message,
+                                    link: notification.info.link,
+                                    sent: notification.info.sent,
+                                }
+                            },
+                            id: notification.id
+                        }
+                        this.unreadNotifications.push(newUnreadNotifications)
+                        this.notifications.push(newUnreadNotifications)
+                    })
+}
 </script>
 
 <template>
@@ -48,6 +80,37 @@ const logout = () => {
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
                             <div class="flex items-center ml-3 relative">
+                                <Dropdown align="right" width="96">
+                                <template #trigger>
+                                    <button class="mt-1 focus:outline-none">
+                                        <div class="flex ml-2 relative">
+                                            <icon name="bell" class="w-6 h-6"></icon>
+                                            <template v-if="Notifications.length > 0">
+                                                <span class="text-white text-xs bg-red-600 rounded-full px-2 py-1 absolute bottom-2 left-3">
+                                                    {{ Notifications.length }}
+                                                </span>
+                                            </template>
+                                        </div>
+                                    </button>
+                                </template>
+
+                                <template #content v-if="Notifications.length > 0">
+                                    <Link :href="route('notifications.update')" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                        Mark all as read
+                                    </Link>
+
+                                    <div class="border-t border-gray-100"></div>
+
+                                    <notifications :unreads="Notifications" :reads="Notifications"></notifications>
+
+                                </template>
+
+                                <template #content v-else>
+                                    <div class="block text-center px-4 py-2 text-xs text-gray-400">
+                                        You have 0 notifications
+                                    </div>
+                                </template>
+                            </Dropdown>
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                     <button v-if="$page.props.jetstream.managesProfilePhotos"
@@ -87,6 +150,8 @@ const logout = () => {
                                         </form>
                                     </template>
                                 </Dropdown>
+
+                                
                             </div>
                         </div>
 

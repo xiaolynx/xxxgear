@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\FriendRequestAcceptedEvent;
+use App\Events\FriendRequestReceivedEvent;
 use App\Models\User;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 
 class FriendController extends Controller
@@ -14,8 +16,7 @@ class FriendController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return Inertia::render('User/Friends/Index', [
             'friends' => auth()->user()->friends(),
             'requests' => auth()->user()->pending_friend_requests(),
@@ -39,13 +40,13 @@ class FriendController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, User $user)
-    {
-        if(!$user){
-            return back()->withErrors(['message'=>'This user could not be found']);
+    public function store(Request $request, User $user) {
+        if (!$user) {
+            return back()->withErrors(['message' => 'This user could not be found']);
         }
-       auth()->user()->add_friend($user->id);
-       return back();
+        auth()->user()->add_friend($user->id);
+        event(new FriendRequestReceivedEvent($user));
+        return back();
     }
 
     /**
@@ -77,12 +78,12 @@ class FriendController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,User $user)
-    {
-        if(!$user){
-            return back()->withErrors(['message'=>'This user could not be found']);
+    public function update(Request $request, User $user) {
+        if (!$user) {
+            return back()->withErrors(['message' => 'This user could not be found']);
         }
         auth()->user()->accept_friend($user->id);
+        event(new FriendRequestAcceptedEvent($user));
         return back();
     }
 
@@ -92,8 +93,7 @@ class FriendController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
-    {
+    public function destroy(User $user) {
         if (!$user) {
             return back()->withErrors(['message' => 'This user could not be found']);
         }
@@ -108,8 +108,7 @@ class FriendController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function deny(User $user)
-    {
+    public function deny(User $user) {
         if (!$user) {
             return back()->withErrors(['message' => 'This user could not be found']);
         }
