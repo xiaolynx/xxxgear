@@ -54,8 +54,8 @@ class FriendRequestAccepted extends Notification implements ShouldQueue
     public function toArray($notifiable) {
         return [
             'info' => [
-                'message' => $this->user->username." has accepted your friend request.",
-                'link' => route('profiles.show', $this->user->username),
+                'message' => $this->user->name." has accepted your friend request.",
+                'link' => route('profiles.show', $this->user->name),
                 'avatar' => $this->user->profile_photo_url,
                 'sent' => Carbon::now()
             ]

@@ -97,7 +97,6 @@ export default {
         return {
             form: this.$inertia.form({
                 name: '',
-                username: '',
                 gender: '',
                 email: '',
                 password: '',

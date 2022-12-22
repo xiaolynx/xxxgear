@@ -54,7 +54,7 @@ class SomeonePosted extends Notification implements ShouldQueue
     public function toArray($notifiable) {
         return [
             'info' => [
-                'message' => $this->user->username." has posted on your timeline.",
+                'message' => $this->user->name." has posted on your timeline.",
                 'link' => route('dashboard.index'),
                 'avatar' => $this->user->profile_photo_url,
                 'sent' => Carbon::now(),
