@@ -1,61 +1,3 @@
-<script setup>
-import { ref } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import ApplicationMark from '@/Components/ApplicationMark.vue';
-import Banner from '@/Components/Banner.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import SideBar from '@/Components/SideBar.vue';
-import Notifications from '@/Components/Notifications.vue'
-
-const showingNavigationDropdown = ref(false);
-
-const switchToTeam = (team) => {
-    Inertia.put(route('current-team.update'), {
-        team_id: team.id,
-    }, {
-        preserveState: false,
-    });
-};
-
-const logout = () => {
-    Inertia.post(route('logout'));
-};
-const data=()=>{
-    return {
-                showingNavigationDropdown: false,
-                unreadNotifications: this.$page.props.auth.unreadNotifications,
-                readNotifications: this.$page.props.auth.readNotifications,
-                notifications: this.$page.props.auth.notifications,
-            }
-}
-
-const mounted=()=>{
-    this.listen();
-}
-
-const listen=()=>{
-    Echo.private(`App.Models.User.${this.$page.props.user.id}`)
-                    .notification((notification) => {
-                        let newUnreadNotifications = {
-                            data: {
-                                info: {
-                                    avatar: notification.info.avatar,
-                                    message: notification.info.message,
-                                    link: notification.info.link,
-                                    sent: notification.info.sent,
-                                }
-                            },
-                            id: notification.id
-                        }
-                        this.unreadNotifications.push(newUnreadNotifications)
-                        this.notifications.push(newUnreadNotifications)
-                    })
-}
-</script>
 
 <template>
     <div class="flex flex-col min-h-screen">
@@ -81,27 +23,27 @@ const listen=()=>{
                             <!-- Settings Dropdown -->
                             <div class="flex items-center ml-3 relative">
                                 <Dropdown align="right" width="96">
-                                <template #trigger>
+                                    <template #trigger>
                                     <button class="mt-1 focus:outline-none">
                                         <div class="flex ml-2 relative">
                                             <icon name="bell" class="w-6 h-6"></icon>
-                                            <template v-if="Notifications.length > 0">
+                                            <template v-if="unreadNotifications.length > 0">
                                                 <span class="text-white text-xs bg-red-600 rounded-full px-2 py-1 absolute bottom-2 left-3">
-                                                    {{ Notifications.length }}
+                                                    {{ unreadNotifications.length }}
                                                 </span>
                                             </template>
                                         </div>
                                     </button>
                                 </template>
 
-                                <template #content v-if="Notifications.length > 0">
+                                <template #content v-if="notifications.length > 0">
                                     <Link :href="route('notifications.update')" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                                         Mark all as read
                                     </Link>
 
                                     <div class="border-t border-gray-100"></div>
 
-                                    <notifications :unreads="Notifications" :reads="Notifications"></notifications>
+                                    <notifications :unreads="unreadNotifications" :reads="readNotifications"></notifications>
 
                                 </template>
 
@@ -223,9 +165,72 @@ const listen=()=>{
             
         </div>
 </template>
+<script>
+  import { Inertia } from '@inertiajs/inertia';
+import { Head, Link } from '@inertiajs/inertia-vue3';
+import ApplicationMark from '@/Components/ApplicationMark.vue';
+import Banner from '@/Components/Banner.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+    import Notifications from '@/Components/Notifications.vue'
+    import SideBar from '@/Components/SideBar.vue'
+    export default {
+        components: {
+            Inertia,
+            Head, Link,
+            ApplicationMark,
+            Banner,
+            Dropdown,
+            DropdownLink,
+            NavLink,
+            ResponsiveNavLink,
+            Notifications,
+            SideBar
+        },
+
+        data() {
+            return {
+                showingNavigationDropdown: false,
+                unreadNotifications: this.$page.props.auth.unreadNotifications,
+                readNotifications: this.$page.props.auth.readNotifications,
+                notifications: this.$page.props.auth.notifications,
+            }
+        },
+
+        mounted() {
+            this.listen()
+        },
+
+        methods: {
+            listen() {
+                Echo.private(`App.Models.User.${this.$page.props.user.id}`)
+                    .notification((notification) => {
+                        let newUnreadNotifications = {
+                            data: {
+                                info: {
+                                    avatar: notification.info.avatar,
+                                    message: notification.info.message,
+                                    link: notification.info.link,
+                                    sent: notification.info.sent,
+                                }
+                            },
+                            id: notification.id
+                        }
+                        this.unreadNotifications.push(newUnreadNotifications)
+                        this.notifications.push(newUnreadNotifications)
+                    })
+            },
+            logout() {
+                this.$inertia.post(route('logout'));
+            },
+        }
+    }
+</script>
+
 <style>
-body.swal2-toast-shown .swal2-container.swal2-top-end,
-body.swal2-toast-shown .swal2-container.swal2-top-right {
-    top: 60px;
-}
+    body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right {
+        top: 60px;
+    }
 </style>

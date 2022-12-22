@@ -4,8 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use App\Models\User;
 
 class NotificationController extends Controller
 {
@@ -16,9 +14,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return Inertia::render('User/Notification/Index', [
-            'notification' => User::all()
-        ]);
+        //
     }
 
     /**
@@ -35,11 +31,12 @@ class NotificationController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request, $id) {
+        $notification = auth()->user()->unreadNotifications->find($id);
+        return $notification->markAsRead();
     }
 
     /**
@@ -68,12 +65,12 @@ class NotificationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request) {
+        $notifications = auth()->user()->unreadNotifications;
+        $notifications->markAsRead();
+        return back();
     }
 
     /**
@@ -82,8 +79,9 @@ class NotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        $notification = auth()->user()->notifications->find($id);
+        $notification->delete();
+        return back();
     }
 }
