@@ -38,7 +38,7 @@
 
                                 <template #content v-if="notifications.length > 0">
                                     <Link :href="route('notifications.update')" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
-                                        Mark all as read
+                                        Đánh dấu là đã đọc tất cả
                                     </Link>
 
                                     <div class="border-t border-gray-100"></div>
@@ -49,7 +49,7 @@
 
                                 <template #content v-else>
                                     <div class="block text-center px-4 py-2 text-xs text-gray-400">
-                                        You have 0 notifications
+                                        Bạn chưa có thông báo nào.
                                     </div>
                                 </template>
                             </Dropdown>
