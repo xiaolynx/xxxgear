@@ -3,13 +3,12 @@
         <template #title>
             <div class="flex flex-col items-center sm:flex-row sm:justify-between">
                 <h2 class="flex items-end font-semibold text-xl text-gray-800 leading-tight">
-                    <Link :href="route('members.index')" class="capitalize underline">
+                    <Link :href="route('members.index')" class="capitalize ">
                         Tất cả mọi người
                     </Link>
                 </h2>
                 <span class="text-gray-800 leading-tight text-lg capitalize mt-5 sm:mt-0">
-                    Visit your
-                    <Link href="#" class="underline hover:text-violet-500">friends</Link>
+                    <Link href="friends" class=" hover:text-violet-500">Bạn bè</Link>
                 </span>
             </div>
         </template>
