@@ -1,11 +1,11 @@
 <template>
     <jet-form-section @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Thông tin tài khoản
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Cập nhật thông tin hồ sơ tài khoản và địa chỉ email của bạn.
         </template>
 
         <template #form>
@@ -16,7 +16,7 @@
                             ref="photo"
                             @change="updatePhotoPreview">
 
-                <jet-label for="photo" value="Photo" />
+                <jet-label for="photo" value="Ảnh" />
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" v-show="! photoPreview">
@@ -31,11 +31,11 @@
                 </div>
 
                 <jet-secondary-button class="mt-2 mr-2" type="button" @click.enter.prevent="selectNewPhoto">
-                    Select A New Photo
+                    Chọn ảnh mới
                 </jet-secondary-button>
 
                 <jet-secondary-button type="button" class="mt-2" @click.enter.prevent="deletePhoto" v-if="user.profile_photo_path">
-                    Remove Photo
+                    Xóa ảnh
                 </jet-secondary-button>
 
                 <jet-input-error :message="form.errors.photo" class="mt-2" />
