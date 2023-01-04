@@ -23,5 +23,8 @@
         "vite": "^3.0.0",
         "vue": "^3.2.31",
         "webpack-cli": "^5.0.0"
+    },
+    "dependencies": {
+        "ziggy": "^2.4.0"
     }
 }
